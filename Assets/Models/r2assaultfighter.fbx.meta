@@ -1,0 +1,194 @@
+fileFormatVersion: 2
+guid: 399b2d30f804fa9459a6c28fb8cb5575
+timeCreated: 1509672423
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: BOTTOMENGINE
+    100002: Camera
+    100004: Cube
+    100006: Cube.004
+    100008: Cube.005
+    100010: GLASS
+    100012: GUNBASE
+    100014: GUNTUBEHOLDER
+    100016: HULL
+    100018: Lamp
+    100020: Lamp.001
+    100022: MAINGUN
+    100024: MIDENGINE
+    100026: Point
+    100028: Point.001
+    100030: //RootNode
+    100032: TOPENGINE
+    100034: TUBEBOTTOM
+    100036: TUBELEFT.001
+    100038: TUBERIGHT
+    100040: TUBETOP
+    100042: WINGENGINE
+    100044: WINGGUN
+    100046: WINGSIDE
+    100048: WINGTOP
+    400000: BOTTOMENGINE
+    400002: Camera
+    400004: Cube
+    400006: Cube.004
+    400008: Cube.005
+    400010: GLASS
+    400012: GUNBASE
+    400014: GUNTUBEHOLDER
+    400016: HULL
+    400018: Lamp
+    400020: Lamp.001
+    400022: MAINGUN
+    400024: MIDENGINE
+    400026: Point
+    400028: Point.001
+    400030: //RootNode
+    400032: TOPENGINE
+    400034: TUBEBOTTOM
+    400036: TUBELEFT.001
+    400038: TUBERIGHT
+    400040: TUBETOP
+    400042: WINGENGINE
+    400044: WINGGUN
+    400046: WINGSIDE
+    400048: WINGTOP
+    2000000: Camera
+    2300000: BOTTOMENGINE
+    2300002: Cube
+    2300004: Cube.004
+    2300006: Cube.005
+    2300008: GLASS
+    2300010: GUNBASE
+    2300012: GUNTUBEHOLDER
+    2300014: HULL
+    2300016: MAINGUN
+    2300018: MIDENGINE
+    2300020: TOPENGINE
+    2300022: TUBEBOTTOM
+    2300024: TUBELEFT.001
+    2300026: TUBERIGHT
+    2300028: TUBETOP
+    2300030: WINGENGINE
+    2300032: WINGGUN
+    2300034: WINGSIDE
+    2300036: WINGTOP
+    3300000: BOTTOMENGINE
+    3300002: Cube
+    3300004: Cube.004
+    3300006: Cube.005
+    3300008: GLASS
+    3300010: GUNBASE
+    3300012: GUNTUBEHOLDER
+    3300014: HULL
+    3300016: MAINGUN
+    3300018: MIDENGINE
+    3300020: TOPENGINE
+    3300022: TUBEBOTTOM
+    3300024: TUBELEFT.001
+    3300026: TUBERIGHT
+    3300028: TUBETOP
+    3300030: WINGENGINE
+    3300032: WINGGUN
+    3300034: WINGSIDE
+    3300036: WINGTOP
+    4300000: HULL
+    4300002: Cube
+    4300004: GLASS
+    4300006: MAINGUN
+    4300008: BOTTOMENGINE
+    4300010: GUNTUBEHOLDER
+    4300012: Cube.004
+    4300014: WINGENGINE
+    4300016: WINGSIDE
+    4300018: WINGGUN
+    4300020: WINGTOP
+    4300022: GUNBASE
+    4300024: TUBETOP
+    4300026: Cube.005
+    4300028: TOPENGINE
+    4300030: TUBEBOTTOM
+    4300032: TUBERIGHT
+    4300034: TUBELEFT.001
+    4300036: MIDENGINE
+    10800000: Lamp
+    10800002: Lamp.001
+    10800004: Point
+    10800006: Point.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

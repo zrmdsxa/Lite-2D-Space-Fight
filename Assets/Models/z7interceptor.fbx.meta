@@ -1,0 +1,152 @@
+fileFormatVersion: 2
+guid: ebb14a4f5c353de41a26b7dd04192198
+timeCreated: 1509670231
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: airthing
+    100002: BackWing
+    100004: bigairthing
+    100006: BODY
+    100008: Camera
+    100010: Engine
+    100012: Engine2
+    100014: Glass
+    100016: Gun
+    100018: hover
+    100020: hover.001
+    100022: mount
+    100024: mount.001
+    100026: TopWing
+    100028: //RootNode
+    400000: airthing
+    400002: BackWing
+    400004: bigairthing
+    400006: BODY
+    400008: Camera
+    400010: Engine
+    400012: Engine2
+    400014: Glass
+    400016: Gun
+    400018: hover
+    400020: hover.001
+    400022: mount
+    400024: mount.001
+    400026: TopWing
+    400028: //RootNode
+    2000000: Camera
+    2300000: airthing
+    2300002: BackWing
+    2300004: bigairthing
+    2300006: BODY
+    2300008: Engine
+    2300010: Engine2
+    2300012: Glass
+    2300014: Gun
+    2300016: hover
+    2300018: hover.001
+    2300020: mount
+    2300022: mount.001
+    2300024: TopWing
+    3300000: airthing
+    3300002: BackWing
+    3300004: bigairthing
+    3300006: BODY
+    3300008: Engine
+    3300010: Engine2
+    3300012: Glass
+    3300014: Gun
+    3300016: hover
+    3300018: hover.001
+    3300020: mount
+    3300022: mount.001
+    3300024: TopWing
+    4300000: mount
+    4300002: Gun
+    4300004: Glass
+    4300006: BODY
+    4300008: mount.001
+    4300010: hover.001
+    4300012: TopWing
+    4300014: Engine2
+    4300016: BackWing
+    4300018: airthing
+    4300020: bigairthing
+    4300022: Engine
+    4300024: hover
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
