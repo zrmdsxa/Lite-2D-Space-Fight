@@ -1703,12 +1703,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e79a12c3257a940acdb84f4b8dc416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ap: 100
-  m_sp: 100
+  m_maxAP: 100
+  m_maxSP: 100
   m_minSpeed: 50
-  m_maxSpeed: 150
-  m_acceleration: 1
-  m_thrust: 1
+  m_maxSpeed: 300
+  m_acceleration: 2
+  m_thrust: 0
   isPlayer: 1
   m_turnRate: 100
 --- !u!114 &114746776954414556

@@ -11,8 +11,11 @@ public class ShipScript : NetworkBehaviour
 
 
 
-    public float m_ap = 100.0f;	//armor
-    public float m_sp = 100.0f;	//shield
+    public float m_maxAP = 100.0f;	//armor
+    public float m_maxSP = 100.0f;	//shield
+
+    float m_AP;
+    float m_SP;
 
     public float m_minSpeed = 100.0f;
     public float m_maxSpeed = 100.0f; //speed in meters per second
@@ -101,7 +104,9 @@ public class ShipScript : NetworkBehaviour
             {
                 TurnShip();
                 UpdateVelocity();
+                UpdateUI();
             }
+            Debug.Log(m_rb.velocity.magnitude);
         }
 
     }
@@ -161,4 +166,7 @@ public class ShipScript : NetworkBehaviour
 
     }
 
+    void UpdateUI(){
+        PlayerPlayScript.myPlayer.UpdateSpeed(m_rb.velocity.magnitude);
+    }
 }

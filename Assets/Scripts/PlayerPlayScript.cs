@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerPlayScript : NetworkBehaviour
 {
+    public Text speedText;
     public GameObject z7interceptor;
 
 	public GameObject gunbullet;
 
 	public static PlayerPlayScript myPlayer;
+    
 
     void Awake()
     {
@@ -31,17 +34,24 @@ public class PlayerPlayScript : NetworkBehaviour
             {
                 Destroy(gameObject);
             }
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);   //canvas
+            transform.GetChild(1).gameObject.SetActive(true);   //camera
+            transform.GetChild(2).gameObject.SetActive(false);  //speed text
 
         }
         //Debug.Log("player :" + connectionToClient);
     }
 
-    void HideUI()
+    void ShipSelected()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);  //canvas
+        transform.GetChild(1).gameObject.SetActive(false);  //camera
+        transform.GetChild(2).gameObject.SetActive(true); // speed text
+
+    }
+
+    public void UpdateSpeed(float speed){
+        speedText.text = speed.ToString("0") + " m/s";
     }
 
     public void SpawnZ7Interceptor()
@@ -50,8 +60,9 @@ public class PlayerPlayScript : NetworkBehaviour
 
         if (isLocalPlayer)
         {
-            HideUI();
+            ShipSelected();
             CmdSpawnZ7Interceptor();
+            
         }
 
 
