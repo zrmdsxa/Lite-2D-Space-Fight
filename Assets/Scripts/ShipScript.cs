@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 //GameObject 
 //Pivot
 //Model
+public enum AIState {Search,Attack,Run}
+
 public class ShipScript : NetworkBehaviour
 {
-
-
 
     public float m_maxAP = 100.0f;	//armor
     public float m_maxSP = 100.0f;	//shield
@@ -26,7 +26,7 @@ public class ShipScript : NetworkBehaviour
 
     public float m_thrust = 1.0f;
 
-    public bool isPlayer = false;
+    
 
     private float m_minThrust; // minspeed / maxspeed
 
@@ -43,45 +43,61 @@ public class ShipScript : NetworkBehaviour
 
     private float m_turn;
 
+    public bool isPlayer = false;
+    public bool isAllyAI = false;
+    public bool isEnemyAI = false;
+
 
 
     // Use this for initialization
 
+    //Server and clients start with this!!!
+    //set isPlayer from PlayerPlayScript
     public override void OnStartAuthority()
     {
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
-        if (hasAuthority)
+        if (hasAuthority && isPlayer)
         {
-            
+            Debug.Log("ShipScript.OnStartAuthority/"+gameObject.name);
             m_rb = GetComponent<Rigidbody>();
             m_ship = transform.GetChild(0);
             m_defaultRotation = m_ship.localRotation;
             m_rollRate = m_turnRate * 2.0f;
             m_minThrust = m_minSpeed / m_maxSpeed;
-
+            
             transform.GetChild(1).gameObject.SetActive(true);
-            isPlayer = true;
+            //isPlayer = true;  //set on cmd
+        }
+        else{
+            //Debug.Log();
         }
 
     }
 
+    //the client also runs this for some reason
     void Start()
     {
+        Debug.Log(gameObject.name+"/ShipScript.Start isPlayer:"+isPlayer);
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
+        /*
         if (hasAuthority)
         {
-            
+            Debug.Log("ShipScript.Start/"+gameObject.name);
             m_rb = GetComponent<Rigidbody>();
             m_ship = transform.GetChild(0);
             m_defaultRotation = m_ship.localRotation;
             m_rollRate = m_turnRate * 2.0f;
             m_minThrust = m_minSpeed / m_maxSpeed;
 
-            transform.GetChild(1).gameObject.SetActive(true);
-            isPlayer = true;
+            if(isPlayer){
+                transform.GetChild(1).gameObject.SetActive(true);
+                isPlayer = true;
+            }
+            
         }
+        */
 
     }
 
@@ -93,6 +109,7 @@ public class ShipScript : NetworkBehaviour
 
         }
     */
+
     // Update is called once per frame
 
     void Update()
@@ -106,9 +123,23 @@ public class ShipScript : NetworkBehaviour
                 UpdateVelocity();
                 UpdateUI();
             }
-            Debug.Log(m_rb.velocity.magnitude);
+            else if(isAllyAI){
+                AllyUpdate();
+            }
+            else if(isEnemyAI){
+                //Debug.Log("EnemyAI");
+                EnemyUpdate();
+            }
+            //Debug.Log(m_rb.velocity.magnitude);
         }
 
+    }
+
+    void AllyUpdate(){
+
+    }
+    void EnemyUpdate(){
+        AITurnShip();
     }
 
     void UpdateVelocity()
@@ -121,6 +152,10 @@ public class ShipScript : NetworkBehaviour
 
         //Debug.Log(m_rb.velocity.magnitude);
         //m_rb.velocity = transform.up * m_maxSpeed * m_speedScale * Time.deltaTime;
+    }
+
+    void AiUpdateVelocity(){
+        m_thrust += Input.GetAxis("Vertical") * m_acceleration * Time.deltaTime * 0.1f;
     }
 
     void TurnShip()
@@ -166,7 +201,21 @@ public class ShipScript : NetworkBehaviour
 
     }
 
+    void AITurnShip(){
+        m_turn += 1 * m_turnRate * Time.deltaTime;
+
+        m_turn = Mathf.Clamp(m_turn, -m_turnRate, m_turnRate);
+        //Debug.Log(m_turn);
+        //Turn ship left/right
+        //transform.Rotate(0, 0, Input.GetAxis("Horizontal") * m_turnRate * Time.deltaTime * -1);
+        transform.Rotate(0, 0, m_turn * Time.deltaTime * -1);
+
+        //Quaternion rot = m_ship.localRotation;
+    }
+
     void UpdateUI(){
         PlayerPlayScript.myPlayer.UpdateSpeed(m_rb.velocity.magnitude);
     }
+
+
 }

@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Scenes/menu.unity
     guid: 208289fe931c22848bacf25d3e30557b
   - enabled: 1
-    path: Assets/Scenes/networkplay.unity
+    path: Assets/Scenes/play.unity
     guid: 2b045f5c55f6f304ab8354492de1e9e0

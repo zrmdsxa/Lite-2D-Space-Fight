@@ -12,7 +12,7 @@ public class FireGun : NetworkBehaviour
     public bool isPlayer = false;
     Rigidbody m_rb;
 
-    PlayerPlayScript m_pps;
+    //PlayerPlayScript m_pps;
 
     public Transform[] gunpoints;
 
@@ -24,8 +24,8 @@ public class FireGun : NetworkBehaviour
         {
             Debug.Log("Firegun Start()");
             m_rb = GetComponent<Rigidbody>();
-            m_pps = PlayerPlayScript.myPlayer;
-            isPlayer = true;
+            //m_pps = PlayerPlayScript.myPlayer;
+            //isPlayer = true;
         }
 
     }

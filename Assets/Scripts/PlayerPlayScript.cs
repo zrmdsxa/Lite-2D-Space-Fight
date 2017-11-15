@@ -12,6 +12,8 @@ public class PlayerPlayScript : NetworkBehaviour
 	public GameObject gunbullet;
 
 	public static PlayerPlayScript myPlayer;
+
+    public GameObject enemyTest;
     
 
     void Awake()
@@ -65,7 +67,6 @@ public class PlayerPlayScript : NetworkBehaviour
             
         }
 
-
     }
 
     [Command]
@@ -74,8 +75,19 @@ public class PlayerPlayScript : NetworkBehaviour
     {
         Debug.Log("spawn z7");
         GameObject go = Instantiate(z7interceptor);
+        go.GetComponent<ShipScript>().isPlayer = true;
         go.GetComponent<FireGun>().isPlayer = true;
+        //go.GetComponent<FireGun>().isPlayer = true;
         NetworkServer.SpawnWithClientAuthority(go, gameObject);
+
+        //to be used for spawning enemies
+        /*
+        if (isServer){
+            GameObject e = Instantiate(enemyTest);
+            
+            NetworkServer.SpawnWithClientAuthority(e, gameObject);
+        }
+        */
 
     }
 /* 
