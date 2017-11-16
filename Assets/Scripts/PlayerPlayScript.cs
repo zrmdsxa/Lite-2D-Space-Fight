@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class PlayerPlayScript : NetworkBehaviour
 {
     public Text speedText;
+    public GameObject gameManager;
+
+    public GameObject zlcarrier1;
+    public GameObject enemycap1;
     public GameObject z7interceptor;
 
 	public GameObject gunbullet;
@@ -14,18 +18,27 @@ public class PlayerPlayScript : NetworkBehaviour
 	public static PlayerPlayScript myPlayer;
 
     public GameObject enemyTest;
+
     
 
-    void Awake()
-    {
-
-    }
 
 
     // Use this for initialization
     void Start()
     {
-        Debug.Log(connectionToClient);
+        Debug.Log("PlayerScript:start");
+        //Debug.Log(connectionToClient);
+        if (isServer){
+            GameObject gm = Instantiate(gameManager);
+            GameObject go1 = Instantiate(zlcarrier1);
+            GameObject go2 = Instantiate(enemycap1);
+            //GameObject gm = Instantiate(gameManager);
+            NetworkServer.SpawnWithClientAuthority(gm, gameObject);
+            NetworkServer.SpawnWithClientAuthority(go1, gameObject);
+            NetworkServer.SpawnWithClientAuthority(go2, gameObject);
+
+           //GameManager.instance.ManualStart();
+        }
         if (isLocalPlayer)
         {
             if (myPlayer == null)
@@ -36,18 +49,24 @@ public class PlayerPlayScript : NetworkBehaviour
             {
                 Destroy(gameObject);
             }
-            transform.GetChild(0).gameObject.SetActive(true);   //canvas
+            transform.GetChild(0).gameObject.SetActive(true);   //spawn canvas
             transform.GetChild(1).gameObject.SetActive(true);   //camera
             transform.GetChild(2).gameObject.SetActive(false);  //speed text
+            transform.GetChild(2).gameObject.SetActive(true);   ///cap ship hp
+            
 
         }
         //Debug.Log("player :" + connectionToClient);
     }
 
+    void LateUpdate(){
+
+    }
+
     void ShipSelected()
     {
         transform.GetChild(0).gameObject.SetActive(false);  //canvas
-        transform.GetChild(1).gameObject.SetActive(false);  //camera
+        //transform.GetChild(1).gameObject.SetActive(false);  //camera
         transform.GetChild(2).gameObject.SetActive(true); // speed text
 
     }
@@ -101,10 +120,6 @@ public class PlayerPlayScript : NetworkBehaviour
 
         //NetworkServer.SpawnWithClientAuthority(b,gameObject);
 		//b.GetComponent<AllyBulletScript>().RpcSetVelocity(vel);
-
-
-
-		
     }
 */
 

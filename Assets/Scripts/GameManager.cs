@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
-    public static GameManager instance;
-    public StateManager m_stateManager; //drag state manager game object here
 
+    public ShipScript allyCapShipScript;
+    public ShipScript enemyCapShipScript;
+
+    float allyCapShipHP;
+    float allyCapShipHPMax;
+    float enemyCapShipHP;
+    float enemyCapShipHPMax;
+
+    public static GameManager instance;
+    //public StateManager m_stateManager; //drag state manager game object here
+    /*
     public float m_introTimer = 5.0f;
     // Use this for initialization
 
-    
+    */
     void Awake()
     {
         if (instance == null)
@@ -22,9 +32,64 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+    void Start()
+    {
+        Debug.Log("GameManager:start");
+        if (isServer)
+        {
+            Debug.Log("GameManager:is server");
+            allyCapShipScript = GameObject.Find("AllyCapShip").GetComponent<ShipScript>();
+            Debug.Log(allyCapShipScript);
+            enemyCapShipScript = GameObject.Find("EnemyCapShip").GetComponent<ShipScript>();
+
+            allyCapShipHP = allyCapShipScript.getAP();
+            Debug.Log("ally capship hp:"+allyCapShipScript.getAP());
+            enemyCapShipHP = enemyCapShipScript.getAP();
+
+            allyCapShipHPMax = allyCapShipScript.m_maxAP;
+            enemyCapShipHPMax = enemyCapShipScript.m_maxAP;
+        }
+    }
+
+    public void ManualStart(){
         
     }
 
+
+
+    void Update()
+    {
+        if (isServer)
+        {
+            allyCapShipHP = allyCapShipScript.getAP();
+            enemyCapShipHP = enemyCapShipScript.getAP();
+        }
+    }
+
+    public float GetAllyCapShipHP()
+    {
+
+        return allyCapShipHP;
+    }
+    public float GetEnemyCapShipHP()
+    {
+
+        return allyCapShipHP;
+    }
+
+    public float GetAllyCapShipHPMax()
+    {
+
+        return allyCapShipHPMax;
+    }
+    public float GetEnemyCapShipHPMax()
+    {
+
+        return enemyCapShipHPMax;
+    }
+    /*
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -72,5 +137,5 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+*/
 }

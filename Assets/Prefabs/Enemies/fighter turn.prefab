@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e79a12c3257a940acdb84f4b8dc416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShipName: UA-100
   m_maxAP: 100
   m_maxSP: 100
   m_minSpeed: 20

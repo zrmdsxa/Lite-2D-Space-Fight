@@ -45,6 +45,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1282882798994872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4901073658008738}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1656066549314042
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,6 +68,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4003493428915982}
+  - component: {fileID: 114966027472120472}
+  - component: {fileID: 114244615445122596}
   m_Layer: 0
   m_Name: cap1
   m_TagString: Untagged
@@ -62,7 +79,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1829515474036344
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -81,14 +98,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656066549314042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 10000, z: 400}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4543736783922598}
+  - {fileID: 4901073658008738}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!4 &4532641755155566
 Transform:
   m_ObjectHideFlags: 1
@@ -108,14 +125,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1829515474036344}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 600}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.3}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 467, z: -41}
+  m_LocalScale: {x: 0.5, y: 0.50000024, z: 0.30000013}
   m_Children:
   - {fileID: 4714928983539854}
-  m_Father: {fileID: 4003493428915982}
+  m_Father: {fileID: 4901073658008738}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4714928983539854
 Transform:
   m_ObjectHideFlags: 1
@@ -128,6 +145,20 @@ Transform:
   m_Children:
   - {fileID: 4532641755155566}
   m_Father: {fileID: 4543736783922598}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4901073658008738
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1282882798994872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4543736783922598}
+  m_Father: {fileID: 4003493428915982}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23195228916768506
@@ -197,3 +228,58 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 895e3c1697337a9458cad89aac25225f, type: 3}
+--- !u!114 &114244615445122596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656066549314042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e79a12c3257a940acdb84f4b8dc416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShipName: EnemyCapShip
+  m_maxAP: 100
+  m_maxSP: 100
+  m_AP: 0
+  m_minSpeed: 1
+  m_maxSpeed: 2
+  m_acceleration: 1
+  m_thrust: 0
+  m_turnRate: 35
+  isPlayer: 0
+  isAllyAI: 0
+  isEnemyAI: 1
+--- !u!114 &114966027472120472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656066549314042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 165
+    i1: 92
+    i2: 180
+    i3: 25
+    i4: 155
+    i5: 113
+    i6: 89
+    i7: 132
+    i8: 40
+    i9: 169
+    i10: 45
+    i11: 208
+    i12: 61
+    i13: 143
+    i14: 157
+    i15: 96
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1

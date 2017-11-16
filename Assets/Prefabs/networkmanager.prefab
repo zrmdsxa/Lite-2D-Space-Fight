@@ -68,6 +68,9 @@ MonoBehaviour:
   m_OfflineScene: menu
   m_OnlineScene: play
   m_SpawnPrefabs:
+  - {fileID: 1111310621474154, guid: 87ecd89b0a0ba56428c039f29c70ff56, type: 2}
+  - {fileID: 1086738962622978, guid: 8c91971646b8d984f877088bb2cd6a88, type: 2}
+  - {fileID: 1656066549314042, guid: a55cb4199b71598428a92dd03d8f9d60, type: 2}
   - {fileID: 1565369389929792, guid: 0a9bf730fd3b98c4982a6458f2a8ef9b, type: 2}
   - {fileID: 1819591633922858, guid: 9ddfe39a1430e0648b10738e4ab39caf, type: 2}
   - {fileID: 1165826951008534, guid: 8be8a1dcbd4227544a297e7b2ea23646, type: 2}

@@ -6,15 +6,16 @@ using UnityEngine.Networking;
 //GameObject 
 //Pivot
 //Model
-public enum AIState {Search,Attack,Run}
+public enum AIState { Search, Attack, Run }
 
 public class ShipScript : NetworkBehaviour
 {
 
+    public string ShipName;
     public float m_maxAP = 100.0f;	//armor
     public float m_maxSP = 100.0f;	//shield
 
-    float m_AP;
+    public float m_AP;
     float m_SP;
 
     public float m_minSpeed = 100.0f;
@@ -26,7 +27,7 @@ public class ShipScript : NetworkBehaviour
 
     public float m_thrust = 1.0f;
 
-    
+
 
     private float m_minThrust; // minspeed / maxspeed
 
@@ -48,7 +49,6 @@ public class ShipScript : NetworkBehaviour
     public bool isEnemyAI = false;
 
 
-
     // Use this for initialization
 
     //Server and clients start with this!!!
@@ -59,26 +59,33 @@ public class ShipScript : NetworkBehaviour
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
         if (hasAuthority && isPlayer)
         {
-            Debug.Log("ShipScript.OnStartAuthority/"+gameObject.name);
+            Debug.Log("ShipScript.OnStartAuthority/" + gameObject.name);
             m_rb = GetComponent<Rigidbody>();
             m_ship = transform.GetChild(0);
             m_defaultRotation = m_ship.localRotation;
             m_rollRate = m_turnRate * 2.0f;
             m_minThrust = m_minSpeed / m_maxSpeed;
-            
+
             transform.GetChild(1).gameObject.SetActive(true);
             //isPlayer = true;  //set on cmd
         }
-        else{
-            //Debug.Log();
-        }
+
 
     }
 
-    //the client also runs this for some reason
+    void Awake()
+    {
+        gameObject.name = ShipName;
+        m_AP = m_maxAP;
+        m_SP = m_maxSP;
+        //Debug.Log(isServer);
+        
+    }
     void Start()
     {
-        Debug.Log(gameObject.name+"/ShipScript.Start isPlayer:"+isPlayer);
+        Debug.Log("ShipScript:Start");
+
+        //Debug.Log(gameObject.name+"/ShipScript.Start isPlayer:"+isPlayer);
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
         /*
@@ -101,20 +108,11 @@ public class ShipScript : NetworkBehaviour
 
     }
 
-   
-
-    /*
-        void FixedUpdate()
-        {
-
-        }
-    */
-
     // Update is called once per frame
 
     void Update()
     {
-       //Debug.Log("update has authority:"+hasAuthority+" localplayer:"+isLocalPlayer);
+        //Debug.Log("update has authority:"+hasAuthority+" localplayer:"+isLocalPlayer);
         if (hasAuthority)
         {
             if (isPlayer)
@@ -123,10 +121,12 @@ public class ShipScript : NetworkBehaviour
                 UpdateVelocity();
                 UpdateUI();
             }
-            else if(isAllyAI){
+            else if (isAllyAI)
+            {
                 AllyUpdate();
             }
-            else if(isEnemyAI){
+            else if (isEnemyAI)
+            {
                 //Debug.Log("EnemyAI");
                 EnemyUpdate();
             }
@@ -135,10 +135,12 @@ public class ShipScript : NetworkBehaviour
 
     }
 
-    void AllyUpdate(){
+    void AllyUpdate()
+    {
 
     }
-    void EnemyUpdate(){
+    void EnemyUpdate()
+    {
         AITurnShip();
     }
 
@@ -154,7 +156,8 @@ public class ShipScript : NetworkBehaviour
         //m_rb.velocity = transform.up * m_maxSpeed * m_speedScale * Time.deltaTime;
     }
 
-    void AiUpdateVelocity(){
+    void AiUpdateVelocity()
+    {
         m_thrust += Input.GetAxis("Vertical") * m_acceleration * Time.deltaTime * 0.1f;
     }
 
@@ -201,7 +204,8 @@ public class ShipScript : NetworkBehaviour
 
     }
 
-    void AITurnShip(){
+    void AITurnShip()
+    {
         m_turn += 1 * m_turnRate * Time.deltaTime;
 
         m_turn = Mathf.Clamp(m_turn, -m_turnRate, m_turnRate);
@@ -213,9 +217,23 @@ public class ShipScript : NetworkBehaviour
         //Quaternion rot = m_ship.localRotation;
     }
 
-    void UpdateUI(){
+    void UpdateUI()
+    {
         PlayerPlayScript.myPlayer.UpdateSpeed(m_rb.velocity.magnitude);
     }
 
+    public void TakeDamage(float damageAP, float damageSP)
+    {
+
+    }
+
+    public float getAP()
+    {
+        return m_AP;
+    }
+    public float getSP()
+    {
+        return m_SP;
+    }
 
 }
