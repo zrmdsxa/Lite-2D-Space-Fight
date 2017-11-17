@@ -19,6 +19,8 @@ public class GameManager : NetworkBehaviour
     float enemyCapShipHP;
     [SyncVar]
     float enemyCapShipHPMax;
+    [SyncVar]
+    Vector3 allyCapShipPosition;
 
 
 
@@ -74,6 +76,9 @@ public class GameManager : NetworkBehaviour
             allyCapShipHP = allyCapShipScript.getAP();
             //Debug.Log(allyCapShipScript.transform.position);
             enemyCapShipHP = enemyCapShipScript.getAP();
+            Vector3 spawn = allyCapShipScript.transform.position;
+            spawn.z = 0;
+            allyCapShipPosition = spawn;
         }
         //Debug.Log(allyCapShipHP);
     }
@@ -99,10 +104,8 @@ public class GameManager : NetworkBehaviour
         return enemyCapShipHPMax;
     }
 
-    public Vector3 GetAllySpawnPoint(){
-        Vector3 spawn = allyCapShipScript.transform.position;
-        spawn.z = 0;
-        return spawn;
+    public Vector3 GetAllyCapShipPosition(){
+        return allyCapShipPosition;
     }
     /*
     // Update is called once per frame

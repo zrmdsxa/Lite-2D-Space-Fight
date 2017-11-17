@@ -35,7 +35,6 @@ public class PlayerPlayScript : NetworkBehaviour
             GameObject go2 = Instantiate(enemycap1);
             go2.GetComponent<ShipScript>().StartSetEnemyAI();
             //go2.GetComponent<FireGun>().StartSetEnemyAI();
-            go2.transform.Rotate(0,0,-90);
             GameObject gm = Instantiate(gameManager);
             
             //GameObject gm = Instantiate(gameManager);
@@ -67,7 +66,7 @@ public class PlayerPlayScript : NetworkBehaviour
     }
 
     void Update(){
-        transform.position = GameManager.instance.GetAllySpawnPoint();
+        transform.position = GameManager.instance.GetAllyCapShipPosition();
     }
 
     void ShipSelected()
@@ -101,7 +100,7 @@ public class PlayerPlayScript : NetworkBehaviour
     {
         Debug.Log("spawn z7");
         GameObject go = Instantiate(z7interceptor);
-        go.transform.position = GameManager.instance.GetAllySpawnPoint();
+        go.transform.position = GameManager.instance.GetAllyCapShipPosition();
         //go.GetComponent<FireGun>().isPlayer = true;
         NetworkServer.SpawnWithClientAuthority(go, gameObject);
         go.GetComponent<ShipScript>().RpcStartSetPlayer();
