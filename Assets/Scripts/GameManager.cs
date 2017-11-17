@@ -9,10 +9,18 @@ public class GameManager : NetworkBehaviour
     public ShipScript allyCapShipScript;
     public ShipScript enemyCapShipScript;
 
+    //SyncVars automatically updated over network
+
+    [SyncVar]
     float allyCapShipHP;
+    [SyncVar]
     float allyCapShipHPMax;
+    [SyncVar]
     float enemyCapShipHP;
+    [SyncVar]
     float enemyCapShipHPMax;
+
+
 
     public static GameManager instance;
     //public StateManager m_stateManager; //drag state manager game object here
@@ -26,7 +34,7 @@ public class GameManager : NetworkBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
@@ -64,13 +72,14 @@ public class GameManager : NetworkBehaviour
         if (isServer)
         {
             allyCapShipHP = allyCapShipScript.getAP();
+            //Debug.Log(allyCapShipScript.transform.position);
             enemyCapShipHP = enemyCapShipScript.getAP();
         }
+        //Debug.Log(allyCapShipHP);
     }
 
     public float GetAllyCapShipHP()
     {
-
         return allyCapShipHP;
     }
     public float GetEnemyCapShipHP()
@@ -89,6 +98,7 @@ public class GameManager : NetworkBehaviour
 
         return enemyCapShipHPMax;
     }
+
     /*
     // Update is called once per frame
     void FixedUpdate()

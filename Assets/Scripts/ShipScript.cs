@@ -15,7 +15,10 @@ public class ShipScript : NetworkBehaviour
     public float m_maxAP = 100.0f;	//armor
     public float m_maxSP = 100.0f;	//shield
 
+    //SyncVars are only sent from server to client
+    [SyncVar]
     public float m_AP;
+    [SyncVar]
     float m_SP;
 
     public float m_minSpeed = 100.0f;
@@ -55,6 +58,7 @@ public class ShipScript : NetworkBehaviour
     //set isPlayer from PlayerPlayScript
     public override void OnStartAuthority()
     {
+        Debug.Log("shipscript:isplayer:"+isPlayer);
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
         if (hasAuthority && isPlayer)
@@ -71,6 +75,11 @@ public class ShipScript : NetworkBehaviour
         }
 
 
+    }
+
+    [ClientRpc]
+    public void RpcStartSetPlayer(){
+        isPlayer = true;
     }
 
     void Awake()

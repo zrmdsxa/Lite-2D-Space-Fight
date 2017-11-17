@@ -19,7 +19,7 @@ public class FireGun : NetworkBehaviour
 
     // Use this for initialization
     public override void OnStartAuthority()
-    {
+    {Debug.Log("firegun:isplayer:"+isPlayer);
         if (hasAuthority)
         {
             Debug.Log("Firegun Start()");
@@ -28,6 +28,11 @@ public class FireGun : NetworkBehaviour
             //isPlayer = true;
         }
 
+    }
+
+    [ClientRpc]
+    public void RpcStartSetPlayer(){
+        isPlayer = true;
     }
 
     // Update is called once per frame
@@ -47,6 +52,7 @@ public class FireGun : NetworkBehaviour
                 {
                     cooldown = 0.0f;
                     //m_pps.CmdFireGun(t.position,transform.rotation,m_rb.velocity + transform.up * bulletSpeed);
+                    
                     Fire();
                     //Debug.Log("fired");
                 }
@@ -59,6 +65,7 @@ public class FireGun : NetworkBehaviour
 
     void Fire()
     {
+        Debug.Log("localfiregun");
         Vector3 velocity = m_rb.velocity + (transform.up * bulletSpeed);
         CmdFireGun(velocity);
     }
@@ -66,7 +73,8 @@ public class FireGun : NetworkBehaviour
     [Command]
     public void CmdFireGun(Vector3 vel)
     {
-        Debug.Log("fire gun");
+        Debug.Log("cmdfiregun");
+
         //GameObject b = Instantiate(gunbullet, pos, rot);
         //b.gameObject.GetComponent<AllyBulletScript>().setVelocity(vel);
         ;
@@ -80,7 +88,7 @@ public class FireGun : NetworkBehaviour
     [ClientRpc]
     public void RpcCreateBullet(Vector3 vel)
     {
-
+        Debug.Log("rpcCreateBullet");
         foreach (Transform t in gunpoints)
         {
             GameObject b = Instantiate(gunbullet, transform.position, transform.rotation);

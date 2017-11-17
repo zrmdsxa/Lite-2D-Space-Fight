@@ -1706,6 +1706,7 @@ MonoBehaviour:
   ShipName: Z7 Interceptor
   m_maxAP: 100
   m_maxSP: 100
+  m_AP: 0
   m_minSpeed: 50
   m_maxSpeed: 300
   m_acceleration: 2
@@ -1760,7 +1761,7 @@ MonoBehaviour:
   gunbullet: {fileID: 1819591633922858, guid: 9ddfe39a1430e0648b10738e4ab39caf, type: 2}
   bulletSpeed: 500
   rateOfFire: 10
-  isPlayer: 0
+  isPlayer: 1
   gunpoints:
   - {fileID: 4993808541472526}
 --- !u!124 &124667670517273340

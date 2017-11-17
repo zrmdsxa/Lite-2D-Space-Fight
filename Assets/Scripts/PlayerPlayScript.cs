@@ -28,7 +28,7 @@ public class PlayerPlayScript : NetworkBehaviour
     {
         Debug.Log("PlayerScript:start");
         //Debug.Log(connectionToClient);
-        if (isServer){
+        if (isServer && isLocalPlayer){
             GameObject gm = Instantiate(gameManager);
             GameObject go1 = Instantiate(zlcarrier1);
             GameObject go2 = Instantiate(enemycap1);
@@ -49,10 +49,11 @@ public class PlayerPlayScript : NetworkBehaviour
             {
                 Destroy(gameObject);
             }
+            Debug.Log("islocalplayer");
             transform.GetChild(0).gameObject.SetActive(true);   //spawn canvas
             transform.GetChild(1).gameObject.SetActive(true);   //camera
             transform.GetChild(2).gameObject.SetActive(false);  //speed text
-            transform.GetChild(2).gameObject.SetActive(true);   ///cap ship hp
+            transform.GetChild(3).gameObject.SetActive(true);   ///cap ship hp
             
 
         }
@@ -94,11 +95,11 @@ public class PlayerPlayScript : NetworkBehaviour
     {
         Debug.Log("spawn z7");
         GameObject go = Instantiate(z7interceptor);
-        go.GetComponent<ShipScript>().isPlayer = true;
-        go.GetComponent<FireGun>().isPlayer = true;
+        
         //go.GetComponent<FireGun>().isPlayer = true;
         NetworkServer.SpawnWithClientAuthority(go, gameObject);
-
+        go.GetComponent<ShipScript>().RpcStartSetPlayer();
+        go.GetComponent<FireGun>().RpcStartSetPlayer();
         //to be used for spawning enemies
         /*
         if (isServer){
