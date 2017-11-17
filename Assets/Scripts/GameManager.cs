@@ -99,6 +99,11 @@ public class GameManager : NetworkBehaviour
         return enemyCapShipHPMax;
     }
 
+    public Vector3 GetAllySpawnPoint(){
+        Vector3 spawn = allyCapShipScript.transform.position;
+        spawn.z = 0;
+        return spawn;
+    }
     /*
     // Update is called once per frame
     void FixedUpdate()

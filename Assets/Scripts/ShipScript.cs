@@ -42,7 +42,7 @@ public class ShipScript : NetworkBehaviour
     private Rigidbody m_rb;
     private Transform m_ship; //This is actually the pivot
 
-    private Quaternion m_defaultRotation;	//default local rotation of a ship facing upwards x:-90 only
+    private Quaternion m_defaultRotation;	//default local rotation of a ship facing upwards. Pivot must be x:0
 
 
     private float m_turn;
@@ -73,6 +73,14 @@ public class ShipScript : NetworkBehaviour
             transform.GetChild(1).gameObject.SetActive(true);
             //isPlayer = true;  //set on cmd
         }
+        else if(hasAuthority && isAllyAI){
+            Debug.Log("ShipScript.OnStartAuthority/" + gameObject.name);
+            m_rb = GetComponent<Rigidbody>();
+            m_ship = transform.GetChild(0);
+            m_defaultRotation = m_ship.localRotation;
+            m_rollRate = m_turnRate * 2.0f;
+            m_minThrust = m_minSpeed / m_maxSpeed;
+        }
 
 
     }
@@ -80,8 +88,19 @@ public class ShipScript : NetworkBehaviour
     [ClientRpc]
     public void RpcStartSetPlayer(){
         isPlayer = true;
+        isAllyAI = false;
+        isEnemyAI = false;
     }
-
+    public void StartSetAllyAI(){
+        isPlayer = false;
+        isAllyAI = true;
+        isEnemyAI = false;
+    }
+    public void StartSetEnemyAI(){
+        isPlayer = false;
+        isAllyAI = false;
+        isEnemyAI = true;
+    }
     void Awake()
     {
         gameObject.name = ShipName;
@@ -132,6 +151,7 @@ public class ShipScript : NetworkBehaviour
             }
             else if (isAllyAI)
             {
+                //Debug.Log("Ally Update");
                 AllyUpdate();
             }
             else if (isEnemyAI)
@@ -146,11 +166,12 @@ public class ShipScript : NetworkBehaviour
 
     void AllyUpdate()
     {
-
+        AiUpdateVelocity();
+        AITurnShip();
     }
     void EnemyUpdate()
     {
-        AITurnShip();
+        //AITurnShip();
     }
 
     void UpdateVelocity()
@@ -167,7 +188,10 @@ public class ShipScript : NetworkBehaviour
 
     void AiUpdateVelocity()
     {
-        m_thrust += Input.GetAxis("Vertical") * m_acceleration * Time.deltaTime * 0.1f;
+        m_thrust = 1.0f;
+        m_thrust = Mathf.Clamp(m_thrust, m_minThrust, 1.0f);
+        m_rb.velocity = transform.up * m_maxSpeed * m_thrust;
+        //m_thrust += Input.GetAxis("Vertical") * m_acceleration * Time.deltaTime * 0.1f;
     }
 
     void TurnShip()
@@ -182,8 +206,8 @@ public class ShipScript : NetworkBehaviour
         transform.Rotate(0, 0, m_turn * Time.deltaTime * -1);
 
         Quaternion rot = m_ship.localRotation;
-
-
+        //Debug.Log("defaultRotation : "+m_defaultRotation.eulerAngles);
+        //Debug.Log("LocalRotation before: "+rot.eulerAngles);
         //Not turning, unroll
         if (Input.GetAxis("Horizontal") == 0.0f)
 
@@ -194,7 +218,7 @@ public class ShipScript : NetworkBehaviour
         //roll the ship
         else
         {
-            m_ship.transform.Rotate(0, 0, Input.GetAxis("Horizontal") * m_rollRate * Time.deltaTime * -1);
+            m_ship.transform.Rotate(0, Input.GetAxis("Horizontal") * m_rollRate * Time.deltaTime * -1, 0);
 
         }
         //Debug.Log(m_ship.transform.localRotation.eulerAngles.y);
@@ -208,7 +232,7 @@ public class ShipScript : NetworkBehaviour
         {
             m_ship.transform.localRotation = Quaternion.Euler(m_ship.transform.localRotation.eulerAngles.x, 270, m_ship.transform.localRotation.eulerAngles.z);
         }
-
+        //Debug.Log(m_ship.transform.localEulerAngles);
         m_turn = Mathf.Lerp(m_turn, 0, Time.deltaTime);
 
     }

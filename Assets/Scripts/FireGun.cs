@@ -10,6 +10,8 @@ public class FireGun : NetworkBehaviour
     float cooldown = 0.0f;
 
     public bool isPlayer = false;
+    public bool isAllyAI = false;
+    public bool isEnemyAI = false;
     Rigidbody m_rb;
 
     //PlayerPlayScript m_pps;
@@ -33,6 +35,18 @@ public class FireGun : NetworkBehaviour
     [ClientRpc]
     public void RpcStartSetPlayer(){
         isPlayer = true;
+        isAllyAI = false;
+        isEnemyAI = false;
+    }
+    public void StartSetAllyAI(){
+        isPlayer = false;
+        isAllyAI = true;
+        isEnemyAI = false;
+    }
+    public void StartSetEnemyAI(){
+        isPlayer = false;
+        isAllyAI = false;
+        isEnemyAI = true;
     }
 
     // Update is called once per frame
