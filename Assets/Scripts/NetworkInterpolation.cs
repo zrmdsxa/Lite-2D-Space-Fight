@@ -46,7 +46,7 @@ public class NetworkInterpolation : NetworkBehaviour
         }
         else
         {
-            Debug.Log("network interp else");
+            //Debug.Log("network interp else");
             transform.position = Vector3.Lerp(transform.position + (networkVelocity * Time.deltaTime * 1.22f), networkPosition, 0.05f);
 
             transform.rotation = Quaternion.Lerp(transform.rotation, networkRotation, 1.0f);

@@ -74,6 +74,18 @@ public class FireGun : NetworkBehaviour
                 }
             }
 
+            if (Input.GetAxis("DropBomb") != 0)
+            {
+                if (cooldown >= 1 / rateOfFire)
+                {
+                    cooldown = 0.0f;
+                    //m_pps.CmdFireGun(t.position,transform.rotation,m_rb.velocity + transform.up * bulletSpeed);
+                    
+                    DropBomb();
+                    //Debug.Log("fired");
+                }
+            }
+
         }
 
     }
@@ -86,6 +98,13 @@ public class FireGun : NetworkBehaviour
         CmdFireGun(velocity);
     }
 
+    void DropBomb()
+    {
+        //Debug.Log("localfiregun");
+        Vector3 velocity = m_rb.velocity + (transform.forward * bulletSpeed);
+        CmdFireGun(velocity);
+    }
+
     [Command]
     public void CmdFireGun(Vector3 vel)
     {
@@ -93,6 +112,7 @@ public class FireGun : NetworkBehaviour
 
         //GameObject b = Instantiate(gunbullet, pos, rot);
         //b.gameObject.GetComponent<AllyBulletScript>().setVelocity(vel);
+        Debug.Log(vel);
         RpcCreateBullet(vel);
 
         //NetworkServer.SpawnWithClientAuthority(b,gameObject);

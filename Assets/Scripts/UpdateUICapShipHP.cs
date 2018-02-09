@@ -24,7 +24,7 @@ public class UpdateUICapShipHP : NetworkBehaviour
         //Debug.Log("updateuicapship start");
         StartCoroutine(LateStart(0.1f));
 
-        //InvokeRepeating("UpdateHP",0.1f,0.1f);
+        InvokeRepeating("LateUpdate",0.1f,0.1f);
     }
 
     IEnumerator LateStart(float waitTime)
@@ -43,11 +43,11 @@ public class UpdateUICapShipHP : NetworkBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        allyCapHP.fillAmount = GameManager.instance.GetAllyCapShipHP() / allyMaxHP;
-		enemyCapHP.fillAmount = GameManager.instance.GetEnemyCapShipHP() / enemyMaxHP;
-        //Debug.Log(GameManager.instance.GetAllyCapShipHP());
-        //Debug.Log(allyMaxHP);
-        //xDebug.Log(GameManager.instance.GetAllyCapShipHP() / allyMaxHP);
-
+        if (GameManager.instance.getGameFinished() == 0){
+            
+            allyCapHP.fillAmount = GameManager.instance.GetAllyCapShipHP() / allyMaxHP;
+		    enemyCapHP.fillAmount = GameManager.instance.GetEnemyCapShipHP() / enemyMaxHP;
+            //Debug.Log("lateupdate:"+GameManager.instance.GetEnemyCapShipHP());
+        }
     }
 }

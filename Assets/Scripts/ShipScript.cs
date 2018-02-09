@@ -62,6 +62,7 @@ public class ShipScript : NetworkBehaviour
     {
         Debug.Log("shipscript:isplayer:"+isPlayer);
         Debug.Log("shipscript:hasAuthority:"+hasAuthority);
+        //transform.GetChild(2).GetComponent<Renderer>().material.SetColor("_Color",new Color(0,184,255));
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
         if (hasAuthority && isPlayer)
@@ -76,7 +77,8 @@ public class ShipScript : NetworkBehaviour
             transform.GetChild(1).gameObject.SetActive(true);
             //isPlayer = true;  //set on cmd
 
-            transform.GetChild(2).GetComponent<Renderer>().material.SetColor("_Color",Color.yellow);
+            //transform.GetChild(2).GetComponent<Renderer>().material.SetColor("_Color",new Color(255,255,0));
+            transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color(255,255,0);
         }
         else if(hasAuthority && (isAllyAI || isEnemyAI)){
             Debug.Log("ShipScript.OnStartAuthority/" + gameObject.name);
@@ -290,7 +292,7 @@ public class ShipScript : NetworkBehaviour
     [ClientRpc]
     void RpcDestroy(){
         Debug.Log("RPCDESTROY()");
-        GameObject go = Instantiate(explodeEffect,transform.position,Quaternion.identity);
+        GameObject go = Instantiate(explodeEffect,transform.position,transform.rotation);
         Destroy(go,3.0f);
         Destroy(gameObject);
     }
