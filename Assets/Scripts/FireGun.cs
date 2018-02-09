@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 public class FireGun : NetworkBehaviour
 {
     public GameObject gunbullet;
+    public float damageAP = 1f;
+    public float damageSP = 0f;
     public float bulletSpeed = 1000.0f;
     public float rateOfFire = 10;
     float cooldown = 0.0f;
@@ -79,7 +81,7 @@ public class FireGun : NetworkBehaviour
 
     void Fire()
     {
-        Debug.Log("localfiregun");
+        //Debug.Log("localfiregun");
         Vector3 velocity = m_rb.velocity + (transform.up * bulletSpeed);
         CmdFireGun(velocity);
     }
@@ -87,11 +89,10 @@ public class FireGun : NetworkBehaviour
     [Command]
     public void CmdFireGun(Vector3 vel)
     {
-        Debug.Log("cmdfiregun");
+        //Debug.Log("cmdfiregun");
 
         //GameObject b = Instantiate(gunbullet, pos, rot);
         //b.gameObject.GetComponent<AllyBulletScript>().setVelocity(vel);
-        ;
         RpcCreateBullet(vel);
 
         //NetworkServer.SpawnWithClientAuthority(b,gameObject);
@@ -102,11 +103,19 @@ public class FireGun : NetworkBehaviour
     [ClientRpc]
     public void RpcCreateBullet(Vector3 vel)
     {
-        Debug.Log("rpcCreateBullet");
+        //Debug.Log("rpcCreateBullet");
         foreach (Transform t in gunpoints)
         {
             GameObject b = Instantiate(gunbullet, transform.position, transform.rotation);
             b.GetComponent<Rigidbody>().velocity = vel;
+            if (tag == "Ally"){
+                b.GetComponent<AllyBulletScript>().setDamage(damageAP,damageSP);
+            }
+            else if (tag == "Enemies"){
+
+            }
+            
+
         }
     }
 

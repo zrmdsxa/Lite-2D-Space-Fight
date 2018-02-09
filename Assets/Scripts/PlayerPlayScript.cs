@@ -17,7 +17,7 @@ public class PlayerPlayScript : NetworkBehaviour
 
 	public static PlayerPlayScript myPlayer;
 
-    public GameObject enemyTest;
+    public GameObject enemyFighterTurn;
 
     
 
@@ -99,7 +99,8 @@ public class PlayerPlayScript : NetworkBehaviour
     public void CmdSpawnZ7Interceptor()
     {
         Debug.Log("spawn z7");
-        GameObject go = Instantiate(z7interceptor);
+        GameObject go = Instantiate(z7interceptor,GameManager.instance.GetAllyCapShipPosition(),Quaternion.identity);
+        //Instantiate(z7interceptor);
         go.transform.position = GameManager.instance.GetAllyCapShipPosition();
         //go.GetComponent<FireGun>().isPlayer = true;
         NetworkServer.SpawnWithClientAuthority(go, gameObject);
@@ -114,6 +115,16 @@ public class PlayerPlayScript : NetworkBehaviour
         }
         */
 
+    }
+
+
+
+    [Command]
+    public void CmdSpawnEnemyFighterTurn(){
+        Debug.Log("spawn Enemy Fighter Turn");
+        GameObject go = Instantiate(enemyFighterTurn,GameManager.instance.GetEnemyCapShipPosition(),Quaternion.identity);
+        NetworkServer.SpawnWithClientAuthority(go,gameObject);
+        
     }
 /* 
     [Command]

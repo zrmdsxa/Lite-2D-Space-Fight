@@ -51,6 +51,8 @@ public class ShipScript : NetworkBehaviour
     public bool isAllyAI = false;
     public bool isEnemyAI = false;
 
+    public GameObject explodeEffect;
+
 
     // Use this for initialization
 
@@ -59,6 +61,7 @@ public class ShipScript : NetworkBehaviour
     public override void OnStartAuthority()
     {
         Debug.Log("shipscript:isplayer:"+isPlayer);
+        Debug.Log("shipscript:hasAuthority:"+hasAuthority);
         //Debug.Log("is local: "+isLocalPlayer+" has authority: "+hasAuthority);
         //Debug.Log("owner:"+GetComponent<NetworkIdentity>().clientAuthorityOwner);
         if (hasAuthority && isPlayer)
@@ -72,8 +75,10 @@ public class ShipScript : NetworkBehaviour
 
             transform.GetChild(1).gameObject.SetActive(true);
             //isPlayer = true;  //set on cmd
+
+            transform.GetChild(2).GetComponent<Renderer>().material.SetColor("_Color",Color.yellow);
         }
-        else if(hasAuthority && isAllyAI){
+        else if(hasAuthority && (isAllyAI || isEnemyAI)){
             Debug.Log("ShipScript.OnStartAuthority/" + gameObject.name);
             m_rb = GetComponent<Rigidbody>();
             m_ship = transform.GetChild(0);
@@ -171,7 +176,8 @@ public class ShipScript : NetworkBehaviour
     }
     void EnemyUpdate()
     {
-        //AITurnShip();
+        AITurnShip();
+        AiUpdateVelocity();
     }
 
     void UpdateVelocity()
@@ -257,7 +263,15 @@ public class ShipScript : NetworkBehaviour
 
     public void TakeDamage(float damageAP, float damageSP)
     {
+        m_AP -= damageAP;
 
+        Debug.Log("Took damage");
+        Debug.Log("AP:"+m_AP);
+
+        if (m_AP <= 0.0f){
+            Debug.Log("This ship should be dead");
+            CmdDestroy();
+        }
     }
 
     public float getAP()
@@ -267,6 +281,18 @@ public class ShipScript : NetworkBehaviour
     public float getSP()
     {
         return m_SP;
+    }
+    [Command]
+    void CmdDestroy(){
+        Debug.Log("CMDDESTROY()");
+        RpcDestroy();
+    }
+    [ClientRpc]
+    void RpcDestroy(){
+        Debug.Log("RPCDESTROY()");
+        GameObject go = Instantiate(explodeEffect,transform.position,Quaternion.identity);
+        Destroy(go,3.0f);
+        Destroy(gameObject);
     }
 
 }

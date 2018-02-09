@@ -23,6 +23,7 @@ public class UpdateUICapShipHP : NetworkBehaviour
         //enemyCapShip = GameObject.Find("EnemyCapShip");
         //Debug.Log("updateuicapship start");
         StartCoroutine(LateStart(0.1f));
+
         //InvokeRepeating("UpdateHP",0.1f,0.1f);
     }
 
